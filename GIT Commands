@@ -1,0 +1,47 @@
+# Basic GIT Commands
+
+git init     ---  Create a New Local repository
+
+git config --global user.name "incia"     ---  To set Author Name during Commits
+
+git config --global user.email incia.anand@gmail.com    --- To set Author Email during Commits
+
+git clone https://github.com/abc/xyz.git    --- To Clone a personal repo after fork
+
+git checkout -b branchname-incia  --- creates a new branch
+
+git checkout branchname-anand     --- go to that branch
+
+git branch                        --- see all branches
+
+git checkout -d branchname-incia  --- delete the branch
+
+git add *   --- Add all files in the repo to
+
+git add /path/to/filename  --- Add a particular file for commit to local repository
+
+git commit -m "commit message"  --- Commit Changes to local repo
+
+git commit -a                   --- Commit current and changes to previous commits
+
+git commit --sign-off "incia.anand@emc.com"  --- Commit by using the sign-off
+
+git push origin master        --- push changes to the master of own remote repo
+
+git status  --- check status of all commits happened and to be done
+
+git diff    --- show difference between commits, commit & directory we are working in
+
+git log --- to see version history of current branch
+
+git grep "func()"  -- search for func() in the woring directory
+
+git pull --- merges change in master on own repo (working directory)
+
+git reset <commit ID>  --- undoes all the commits after the specified commit and preserves the changes locally.
+
+git reset -hard <commit ID>  ---discards all history and goes back to the specified commit.
+
+git merge branchname-incia  --- merge the branch into curent branch
+
+git rm filename   -- to remove the file from working directory
