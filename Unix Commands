@@ -1,0 +1,33 @@
+Here is a list of useful Unix/Lnux Commands :-
+
+#Basic Commands 
+man                                 : See Manual Pages
+history                             : See history of commands used in terminal
+clear                               : Clear the screen
+sudo                                : Gives sueruser or root priveleges
+apt-get                             : Used to install and update packages (eg: sudo apt-get install packagename)
+who                                 : No of users logged in
+whoami                              : List of users logged in with user ID
+cal                                 : Shows Calender
+date                                : Gives date and time
+
+#File System Commands
+ls                                  : List files in a directory
+ls -R                               : List files in sub-directories also
+ls -a                               : List all hidden files
+ls -al                              : List all details - size,owner,permissions
+mv                                  : Moves a file or Rename it (mv file1 file2 if file2 exists, we move contents of file1 to file2 else we rename file1 as file2)
+cp                                  : Copy file contents (cp file1 file2)
+cd                                  : Change to a directory
+pwd                                 : Print the present working directory
+mkdir directoryname                 : Makes a directory
+rmdir directoryname                 : Deletes/Removes a directory
+mv file "New File Location"         : Moves a file to a new file location
+rm filename                         : Deletes/Removes a file
+touch filename                      : Create a file called filename
+cat > filename                      : Concatenate a file called filename or print contents to terminal
+
+#Grep Command to search a regular expession
+
+
+
