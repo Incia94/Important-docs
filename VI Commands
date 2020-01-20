@@ -1,1 +1,12 @@
 The following fie contains Vi editor commands for linux 
+
+SHIFT & ESC to ENTER AND EXIT WRITE MODE RESP
+
+Inserting text
+i - insert text immediately before current cursor position
+a - append text immediately after current cursor position
+o - open line below current one for input
+I - insert to beginning of current line
+A - append text to end of current line
+O - open line above current one for input
+
