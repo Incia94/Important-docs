@@ -45,3 +45,5 @@ git reset -hard <commit ID>  ---discards all history and goes back to the specif
 git merge branchname-incia  --- merge the branch into curent branch
 
 git rm filename   -- to remove the file from working directory
+
+git reset filename -- to undo add for a given file
