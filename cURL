@@ -1,0 +1,6 @@
+cURL a.k.a Client URL
+
+It is a command line tool used to post data to or from a server using various network protocols like HTTP, HTTPS, POP3, FTP, FTPS etc.
+
+
+curl -s -k - H "authentication-token" -v "url"
