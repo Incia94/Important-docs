@@ -1,103 +1,183 @@
-# Basic GIT Commands
+# Basic Git Commands
 
-git init <directory>    ---  Initialize a New Local repository . Directory is optional
+A quick reference for commonly used Git commands.
 
-git config --global user.name "incia"     ---  To set Author Name during Commits
+> Replace placeholders such as `<branch>`, `<file>`, and `<url>` with your values, without the angle brackets.
+> Examples use `main`; replace it with `master` or another branch name as needed.
 
-git config --global user.email incia.anand@gmail.com    --- To set Author Email during Commits. Keep Same as Github Email
+## 1. Initialize and Configure
 
-git clone <URL>    --- To Clone a remote repository
+| Command | Description |
+| --- | --- |
+| `git init` | Initialize a repository in the current directory. |
+| `git init <directory>` | Initialize a repository in the specified directory. |
+| `git config --global user.name "Incia"` | Set the author name for commits. |
+| `git config --global user.email "incia.anand@gmail.com"` | Set the author email for commits. Use an email associated with your GitHub account for commit attribution. |
+| `git clone <url>` | Clone a remote repository locally. |
 
-git checkout -b branchname-incia  --- creates a new branch
+## 2. Manage Branches
 
-git checkout branchname-anand     --- go to that branch
+| Command | Description |
+| --- | --- |
+| `git branch` | List local branches. |
+| `git branch -a` | List local and remote-tracking branches. |
+| `git checkout -b <branch>` | Create and switch to a new branch. |
+| `git checkout <branch>` | Switch to an existing branch. |
+| `git branch -d <branch>` | Delete a local branch if Git considers it safely merged. |
+| `git branch -D <branch>` | Force-delete a local branch, even if it contains unmerged commits. |
 
-git branch                        --- see all branches
+> Switch to another branch before deleting a branch.
 
-git checkout -d branchname-incia / git checkout -D branchname-incia  --- delete the branch
+### Alternative: `git switch`
 
-git add *   --- Add all files in the directory
+```bash
+# Create and switch to a new branch
+git switch -c branchname-incia
 
-git add /path/to/filename  --- Add a particular file for commit to local repository
+# Switch to an existing branch
+git switch branchname-anand
+```
 
-git commit -m "<message>"  --- Commit Changes to local repo
+## 3. Stage and Commit Changes
 
-git commit -a -m "<message>"
+| Command | Description |
+| --- | --- |
+| `git add -A` | Stage all changes across the repository, including new files, modifications, and deletions. |
+| `git add <file>` | Stage changes to a specific file. |
+| `git commit -m "<message>"` | Commit staged changes. |
+| `git commit -a -m "<message>"` | Stage modifications and deletions of tracked files, then commit. Does not include untracked files. |
+| `git commit -am "<message>"` | Shorthand for `git commit -a -m "<message>"`. |
+| `git commit --signoff -m "<message>"` | Commit staged changes and add a `Signed-off-by` line using your configured identity. |
 
-# or
+> `--signoff` adds a sign-off statement; it does not cryptographically sign the commit.
 
-git commit -am "<message>"                   --- Add all changes made to tracked files & commit
+## 4. Inspect Changes and History
 
-git commit --sign-off "incia.anand@emc.com"  --- Commit by using the sign-off
+| Command | Description |
+| --- | --- |
+| `git status` | Show the current branch, staged changes, unstaged changes, and untracked files. |
+| `git diff` | Show unstaged changes in tracked files compared with the staging area. |
+| `git diff --staged` | Show staged changes compared with the latest commit. |
+| `git diff <commit-1> <commit-2>` | Compare two commits. |
+| `git diff <branch-1>..<branch-2>` | Compare the file contents at the tips of two branches. |
+| `git log` | Show commit history for the current branch. |
+| `git log --oneline` | Show a compact commit history. |
+| `git grep -F "func()"` | Search tracked files in the working directory for the literal text `func()`. |
 
-git push origin master        --- push changes to the master of own remote repo
+## 5. Manage Remote Repositories
 
-git status  --- check status of all commits happened and to be done
+| Command | Description |
+| --- | --- |
+| `git remote add <name> <url>` | Add a remote repository. |
+| `git remote` | List remote names. |
+| `git remote -v` | List remote names and their URLs. |
+| `git remote remove <name>` | Remove a remote configuration from the local repository. |
+| `git remote rename <old-name> <new-name>` | Rename a remote. |
 
-git diff    --- show difference between commits, commit & directory we are working in
+### Example
 
-git diff --staged   ---- Use the --staged flag to display the changes to staged files.
+```bash
+git remote add origin https://github.com/username/repository.git
+```
 
-git diff <commit id 01> <commit id 02>   --- Displays changes between two commits
+## 6. Fetch, Pull, and Push
 
-git diff branch1..branch2       ---- Diff between two branches
+| Command | Description |
+| --- | --- |
+| `git fetch <remote>` | Download remote updates without integrating them into the current branch. |
+| `git fetch <remote> <branch>` | Fetch a specific branch from a remote. |
+| `git pull` | Fetch and integrate changes from the current branch's configured upstream. |
+| `git pull <remote>` | Fetch from the remote and integrate the branch selected by Git's configuration. |
+| `git pull <remote> <branch>` | Fetch the specified remote branch and integrate it into the current branch. |
+| `git push <remote> <branch>` | Push the specified local branch to the remote. |
+| `git push -u origin <branch>` | Push a branch and set its upstream for future pushes and pulls. |
+| `git push origin main` | Push the local `main` branch to `origin`. |
 
-git log --- to see version history of current branch
+> Pulling integrates changes using merge or rebase, depending on your options and configuration. It may require you to choose a strategy when branches have diverged.
 
-git grep "func()"  -- search for func() in the woring directory
+## 7. Undo Changes
 
-git pull --- merges change in master on own repo (working directory)
+| Command | Description |
+| --- | --- |
+| `git reset <commit>` | Move the current branch to the specified commit and reset the staging area, while keeping working-directory contents. |
+| `git reset --soft <commit>` | Move the current branch to the specified commit while keeping the staging area and working-directory contents unchanged. |
+| `git reset --hard <commit>` | Move the current branch to the specified commit and reset both the staging area and working directory to match it. |
+| `git reset -- <file>` | Unstage a file while keeping its working-directory contents. |
+| `git restore --staged <file>` | Another way to unstage a file. |
+| `git revert <commit>` | Create a new commit that reverses the changes introduced by a specified commit. |
 
-git reset <commit ID>  --- undoes all the commits after the specified commit and preserves the changes locally.
+> **Caution:** `git reset --hard` discards uncommitted tracked-file changes and may overwrite untracked files that are in the way. Use `git revert` when undoing commits on shared branches to preserve history.
 
-git reset -hard <commit ID>  ---discards all history and goes back to the specified commit.
+## 8. Merge Branches
 
-git reset <file>     ---- Remove a file from the staging area.
+Run these commands from the branch that should receive the changes.
 
-git revert <COMMIT-ID>     ---- Revert a commit. - undo commit
+| Command | Description |
+| --- | --- |
+| `git merge <branch>` | Merge the specified branch into the current branch. |
+| `git merge --no-ff <branch>` | Create a merge commit even when a fast-forward merge is possible. |
+| `git merge --squash <branch>` | Prepare the combined changes from a branch in the staging area without creating a commit. |
 
-git merge branchname-incia  --- merge the branch into current HEAD
---no-ff: Create a merge commit even if the merge resolves as a fast-forward
---squash: Squash all commits from the specified branch into a single commit
+### Squash Merge Example
 
-git rm filename   -- to remove the file from working directory
+```bash
+git switch main
+git merge --squash branchname-incia
+git commit -m "Add completed feature"
+```
 
-git rm --cached <file>  --- remove it from staging area only using --cached flag
+## 9. Remove, Move, and Rename Files
 
-git mv <current path> <new path>   --- Move or Rename a file
+| Command | Description |
+| --- | --- |
+| `git rm <file>` | Remove a tracked file from the working directory and stage its deletion. |
+| `git rm --cached <file>` | Remove a file from Git's index while keeping the local file. After committing, Git stops tracking it. |
+| `git mv <current-path> <new-path>` | Move or rename a tracked file and stage the change. |
 
-git stash     ---  Stash allows you to temporarily store changes without committing them.
+> To keep a file untracked after using `git rm --cached`, add an appropriate entry to `.gitignore`.
 
-git stash save "<message>"   --- To add a message to the stash.
+## 10. Stash Changes
 
-git stash list     --- List all stashes
+| Command | Description |
+| --- | --- |
+| `git stash` | Temporarily save staged and unstaged changes to tracked files, then restore them to the current commit's state. |
+| `git stash push -m "<message>"` | Create a stash with a descriptive message. |
+| `git stash push -u -m "<message>"` | Stash tracked changes and untracked files, excluding ignored files. |
+| `git stash list` | List saved stashes. |
+| `git stash apply 'stash@{0}'` | Apply a stash without removing it from the stash list. |
+| `git stash pop 'stash@{0}'` | Apply a stash and remove it if it applies successfully. |
+| `git stash drop 'stash@{0}'` | Delete a specific stash. |
+| `git stash clear` | Delete all stashes. |
+| `git stash show 'stash@{0}'` | Show a summary of changes in a stash. |
+| `git stash show -p 'stash@{0}'` | Show the patch for a stash. |
 
-git stash apply <stash id>    --- Apply the Stash qwith Stash ID
+> `stash@{0}` is the most recent stash. Use `git stash list` to find other entries.
+> `git stash push -m` is preferred over the older `git stash save` command.
+> Dropping or clearing stashes removes saved changes; check them first.
 
-git stash drop <stash id>   --- Remove from stash
+## 11. Example Workflow
 
-git stash clear             --- Remove all stashes
+```bash
+# Clone the repository
+git clone https://github.com/username/repository.git
+cd repository
 
-git stash pop <stash id>    ---- Apply and remove a stash ID
+# Create a feature branch
+git switch -c feature/my-feature
 
-git stash show <stash id>   ---- Display the changes in the Stash ID
+# Make changes, then inspect them
+git status
+git diff
 
-git remote add <remote name> <url>    ---- Add a remote repository
+# Stage and review changes
+git add -A
+git diff --staged
 
-git remote     ---- Display remote repositories
+# Commit changes
+git commit -m "Add my feature"
 
-git remote -v  --- Display remote repositories with URLs
+# Push the branch and set its upstream
+git push -u origin feature/my-feature
+```
 
-git remote remove <remote name>   --- Remove a Remote Repo
-
-git remote rename <old name> <new name>  --- Rename a Remote Repo
-
-git fetch <remote name>  --- Fetch changes from a remote repository
-
-git fetch <remote name> <branch>  ---- Fetch changes from a particular branch
-
-git pull <remote name> <branch>   ---- Pull changes from a remote repository
-
-git pull <remote name>  ---- Push changes to a remote repository
-
-git pull <remote name> <branch>  ---- Push changes to a remote repository for a particular branch 
+After pushing, open a pull request on GitHub to propose merging your changes.
